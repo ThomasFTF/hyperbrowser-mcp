@@ -10,14 +10,14 @@ export const sessionOptionsSchema = z
   .object({
     useProxy: z
       .boolean()
-      .default(false)
-      .describe("Whether to use a proxy. Recommended false."),
+      .default(true)
+      .describe("Whether to use a proxy. Defaults to true for UK geo-targeting."),
     proxyCountry: z
       .string()
-      .optional()
+      .default("GB")
       .transform((val) => val as any)
       .describe(
-        "ISO 3166-1 alpha-2 country code for the proxy location (e.g. 'GB' for UK, 'US' for USA). Only used when useProxy is true."
+        "ISO 3166-1 alpha-2 country code for the proxy location. Defaults to 'GB' (UK). Only used when useProxy is true."
       ),
     proxyCity: z
       .string()
