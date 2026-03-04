@@ -12,6 +12,19 @@ export const sessionOptionsSchema = z
       .boolean()
       .default(false)
       .describe("Whether to use a proxy. Recommended false."),
+    proxyCountry: z
+      .string()
+      .optional()
+      .transform((val) => val as any)
+      .describe(
+        "ISO 3166-1 alpha-2 country code for the proxy location (e.g. 'GB' for UK, 'US' for USA). Only used when useProxy is true."
+      ),
+    proxyCity: z
+      .string()
+      .optional()
+      .describe(
+        "City name for the proxy location (e.g. 'london'). Only used when useProxy is true and proxyCountry is set."
+      ),
     useStealth: z
       .boolean()
       .default(false)
@@ -42,7 +55,6 @@ export const sessionOptionsSchema = z
       .optional()
       .describe("Options for using a persistent Hyperbrowser profile"),
   })
-  .strict() // Ensure no unknown keys are passed
   .optional()
   .describe(
     "Options for the browser session. Avoid setting these if not mentioned explicitly"
